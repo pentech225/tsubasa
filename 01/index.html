@@ -210,6 +210,17 @@
   .course-card ul{ padding-left: 1.2em; margin: 0.5em 0 0; }
   .course-card li{ margin-bottom: 0.3em; }
 
+  /* 講師紹介 */
+  .teacher-card{ background:#ffffff; border:1px solid var(--color-border); border-radius:4px; padding: 24px 20px; text-align:center; }
+  .teacher-card .teacher-icon{ width: 44px; height: 44px; margin: 0 auto 8px; color: var(--color-primary-dark); }
+  .teacher-card .teacher-icon .icon{ width: 100%; height: 100%; }
+  .teacher-card .teacher-day{ color: var(--color-text-soft); font-size: 1rem; margin: 0 0 0.8em; }
+  .teacher-card p{ text-align:left; margin: 0 0 0.8em; }
+  .teacher-card p:last-child{ margin-bottom: 0; }
+  .teacher-card p.teacher-day{ text-align:center; }
+  .teacher-group{ margin: 32px 0 0; padding-bottom: 0; font-size: 1.3rem; }
+  .teacher-group + .course-grid{ margin-top: 16px; }
+
   /* おすすめシーン */
   .scene-grid{
     display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
@@ -438,7 +449,7 @@
      英語でしゃべれる友達を見つけませんか。」より。日程は2026年9月24日(木)・10月1日(木)。 -->
 <section class="section">
   <h2 class="center">イングリッシュサークル 無料体験会</h2>
-  <p class="center">英字新聞・海外旅行・映画・音楽・料理など、共通の「好き」をテーマに集まる少人数の英語サークルです。歴史・アニメ・推し活など、自分の大好きなものを英語で語り合える仲間を見つけませんか。講師は全てネイティブ。楽しみながら英語が自然と身につきます。</p>
+  <p class="center">英字新聞・海外旅行・映画研究・洋楽など、共通の「好き」をテーマに集まる少人数（定員5名）の英語サークルです。歴史・アニメ・推し活など、自分の大好きなものを英語で語り合える仲間を見つけませんか。講師は全てネイティブ。楽しみながら英語が自然と身につきます。</p>
   <figure class="circle-image">
     <img src="../images/english2.png" alt="ネイティブ講師と参加者が、英字新聞や地球儀、旅行ガイドなど好きなものを囲んで英語で語り合うイングリッシュサークルの様子" loading="lazy">
   </figure>
@@ -469,7 +480,8 @@
         <ul>
           <li>プライベート英会話</li>
           <li>ファミリー英会話</li>
-          <li>グループ英会話</li>
+          <li>プライベートグループ英会話</li>
+          <li>イングリッシュサークル</li>
           <li>英検4級・3級対策</li>
         </ul>
       </div>
@@ -496,6 +508,84 @@
           <li>個人学習</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 講師紹介（英会話・音楽） =====
+     出典: https://www.283296.com/general-1（つばさカルチャースクール公式サイト）。
+     講師の紹介文は同ページの記載に基づく（写真・略歴の追加記載なし）。 -->
+<section class="section section--soft" id="english">
+  <h2 class="center">講師紹介</h2>
+  <h3 class="center teacher-group">英会話講師</h3>
+  <div class="course-grid">
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>ジェームズ</h3>
+      <p class="teacher-day">担当：月・木・金曜日</p>
+      <p>「英語は『楽しい！』と感じることが上達への近道」がモットー。お絵描きや英語の早口言葉などを取り入れ、遊びながら自然に英語に親しめるレッスンを行います。子どもとの時間を大切にした、笑顔いっぱいのレッスンです。</p>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>サイレス</h3>
+      <p class="teacher-day">担当：火・金曜日</p>
+      <p>「『英語を話してみたい！』その気持ちがあれば大丈夫」。実践的なレッスンを提供します。日本語での日常会話もできるので、初心者の方も安心して受講いただけます。</p>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>レイナ</h3>
+      <p class="teacher-day">担当：土曜日</p>
+      <p>「英語を学ぶ時間が『楽しみな時間』になるように」。女性講師ならではの明るく親しみやすい雰囲気で、ゲームや歌を取り入れながら自然に英語を身につけます。お子さまから大人の方まで、一人ひとりに合わせて対応します。</p>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>谷口 真希</h3>
+      <p class="teacher-day">英検対策講座 担当</p>
+      <p>オーストラリア留学の経験があり、現地で実践的に英語を使ってきた講師です。英語が得意な生徒さんはさらに伸ばし、苦手意識のある生徒さんには優しく対応。それぞれのペースに合わせて丁寧にサポートします。</p>
+    </div>
+  </div>
+
+  <h3 class="center teacher-group">音楽講師</h3>
+  <div class="course-grid">
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>藤井 麻理子</h3>
+      <p class="teacher-day">ピアノ講師｜月曜日・木曜日担当</p>
+      <p>はじめてのお子様や初心者の方には、音符カードやリズム打ち、聴音などのソルフェージュで基礎をしっかり、楽しく、わかりやすく、をモットーにしています。また、将来の目標や憧れの曲など、ご希望をお伺いしています。</p>
+      <p>練習の仕方や不安なことなど、悩みが出てくるかと思いますが、レッスンの歩みは人それぞれです！諦めず、自分のペースを大事に。まずは一緒にピアノを楽しみましょう♪</p>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>谷村 恵美</h3>
+      <p class="teacher-day">ピアノ・フルート・オカリナ講師｜火曜日・水曜日・金曜日担当</p>
+      <p>音楽を通して、一人ひとりの個性を伸ばしていけるレッスンをしています。個々に合ったレッスンで、みんなが輝きや自信を持って演奏できるようになります。「自分らしさ」を発見し、音楽で表現する。これを目標にレッスンしています。</p>
+      <p>でも、まずは難しいことは考えず、楽しみましょう。音楽は楽しむためにあるのです。一緒に楽しみながら、素敵な音楽をつくっていきましょう。</p>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>矢倉 実佳</h3>
+      <p class="teacher-day">ピアノ講師｜土曜日担当</p>
+      <p>「ピアノを弾きたい」「何か音楽をしてみたい」という気持ちを大切にしながら、レッスンをしていきたいと考えています。ピアノレッスンを通して、一緒に音楽を楽しんでみませんか。</p>
+    </div>
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>小西 和永</h3>
+      <p class="teacher-day">バイオリン講師｜土曜日担当</p>
+      <p>バイオリンは、美しい音色を楽しみながら、集中力や表現力も自然と育ててくれる楽器です。</p>
+      <p>「楽譜が読めない」「楽器に触れたことがない」という方もご安心ください。一人ひとりのペースに合わせて、基礎から丁寧にレッスンいたします。</p>
+      <p>ドイツでの研修を経験し、現在もオーケストラや社会人カルテットで演奏活動を行っています。</p>
+    </div>
+  </div>
+
+  <h3 class="center teacher-group">習字講師</h3>
+  <div class="course-grid">
+    <div class="teacher-card">
+      <div class="teacher-icon" aria-hidden="true"><svg class="icon"><use href="#icon-user"/></svg></div>
+      <h3>紺野 茉桜</h3>
+      <p class="teacher-day">習字講師</p>
+      <p>習字は、美しい文字を書く技術だけでなく、集中力や姿勢、丁寧に取り組む心も育ててくれます。</p>
+      <p>師範資格を持ち、これまで幅広い年代の方への指導に携わってきました。それぞれの目的やペースに寄り添いながら、基礎から丁寧に指導いたしますので、お子さまはもちろん、大人の方も安心して学んでいただけます。</p>
+      <p>一文字一文字を大切に、美しい文字を書く喜びを一緒に育んでいきましょう。</p>
     </div>
   </div>
 </section>
@@ -567,7 +657,7 @@
   <p class="center">入会金 5,500円（税込）。体験レッスンは1,100円（習字のみ500円）。一度ご入会いただければ、下記のどの講座も自由に受講いただけます。</p>
   <div class="pricing-groups">
     <details class="pricing-group">
-      <summary>英語 <span class="count">（5講座）</span></summary>
+      <summary>英語 <span class="count">（6講座）</span></summary>
       <div class="table-scroll">
         <table class="pricing pricing--courses">
           <thead>
@@ -591,6 +681,12 @@
               <td>月〜土曜日 10:00〜20:00／1レッスン60分</td>
               <td>仲良しのお友達やご家族だけのプライベートレッスン。人数によりお得な団体割引あり</td>
               <td class="price">月3回 2組各7,500円／3組以上各6,500円</td>
+            </tr>
+            <tr>
+              <td>イングリッシュサークル</td>
+              <td>木曜日・月2回／1回45分</td>
+              <td>英字新聞・海外旅行・映画研究・洋楽など、共通の趣味をテーマにした少人数（定員5名）の英会話サークル。対象：初心者〜初中級者・全年齢</td>
+              <td class="price">月2回 5,000円</td>
             </tr>
             <tr>
               <td>英検4級</td>
