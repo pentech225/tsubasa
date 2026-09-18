@@ -6,7 +6,7 @@
 <!-- 社内一時レビュー版のため検索エンジンにインデックスさせない（PRD 2026-08-24追記④ 受け入れ基準） -->
 <meta name="robots" content="noindex, nofollow">
 <title>つばさカルチャースクール｜神戸・湊川公園駅前の総合文化教室【体験レッスン受付中】</title>
-<meta name="description" content="神戸市兵庫区・湊川公園駅から徒歩1分。英語・音楽・書道・そろばんなど幅広い講座を少人数制で。30代から70代まで、幅広い世代の方が安心して始められる総合文化教室、つばさカルチャースクールです。">
+<meta name="description" content="神戸市兵庫区・湊川公園駅から徒歩1分。英語・音楽・書道・そろばんなど幅広い講座を少人数制で。30代から80代まで、幅広い世代の方が安心して始められる総合文化教室、つばさカルチャースクールです。">
 <style>
   :root{
     /* 2026-08-24追記⑦・⑧: CEO最終レビューにより、追記⑥の「和のミニマリズム＋低彩度アースカラー」
@@ -70,8 +70,10 @@
   /* 花のモチーフ（装飾アクセント。絵文字ではなくカスタムSVG）。.icon-flowerは.iconの
      stroke/fillデフォルトを打ち消し、花弁・中心をそれぞれブランドカラーで塗りつぶす */
   .icon-flower{ fill:none; stroke:none; }
-  .icon-flower .petal{ fill: var(--color-accent); opacity: 0.85; }
-  .icon-flower .center-dot{ fill: var(--color-primary); }
+  /* <use>で参照されるスプライト内の要素は、参照元(symbol内)のツリーでセレクタが照合されるため、
+     .icon-flowerを祖先にした指定では一致せず花が描画されなかった。symbol内で直接一致するよう修正 */
+  #icon-flower .petal{ fill: var(--color-accent); opacity: 0.85; }
+  #icon-flower .center-dot{ fill: var(--color-primary); }
 
   /* ボタン共通：タップ領域44px x 44px以上を確保 */
   .btn{
@@ -102,50 +104,68 @@
     display:flex; flex-wrap: wrap; gap: 16px; justify-content:center; margin-top: 28px;
   }
 
-  /* ヘッダー */
-  header.site-header{
-    display:flex; align-items:center; justify-content:center;
-    padding: 16px 20px; background:#ffffff; border-bottom: 1px solid var(--color-border);
+  /* ロゴ（ヒーロー画像の右上に重ねて表示。クリックで公式サイトへ） */
+  .hero .hero-logo{
+    position: absolute;
+    top: 16px; right: 16px;
+    z-index: 2;
+    display:block;
+    line-height: 0;
   }
-  header.site-header img{ max-height: 72px; width:auto; }
+  .hero .hero-logo img{ width: 160px; height:auto; border-radius: 8px; }
+  @media (max-width: 720px){
+    .hero .hero-logo{ top: 10px; right: 10px; }
+    .hero .hero-logo img{ width: 96px; }
+  }
 
   /* ヒーロー */
-  /* 2026-08-24追記⑦: 「ロゴ→大きなヒーロー画像→紹介文＋CTA」の構成（283296.com同様）へ
-     再構成。画像を先頭・edge-to-edge（左右余白なし）で大きく見せ、その下に見出し・
-     サブコピー・CTAを配置する。背景は単色の淡ピンク（光沢グラデーションなし）。 */
+  /* 2026-09-19追記: eyebrow・見出し・サブコピーをヒーロー画像の上に重ねて表示する構成へ変更。
+     CTAボタン行は従来どおり画像の下に配置したまま。可読性確保のため、画像の上に単色半透明の
+     スクリム（グラデーションではなくフラットな黒の半透明レイヤー）を敷き、その上に白文字で表示する。 */
   .hero{
-    background: var(--color-bg-soft);
+    background: #ffffff;
     text-align:center;
     padding: 0 0 40px;
     border-bottom: 1px solid var(--color-border);
   }
   .hero .hero-image{
+    position: relative;
     margin: 0 0 28px;
     border-radius: 0;        /* edge-to-edge表示のため角丸なし */
     overflow:hidden;
     border-bottom: 1px solid var(--color-border);
   }
-  .hero .hero-image img{
+  .hero .hero-image > img{
     width: 100%;
-    aspect-ratio: 16 / 10;   /* モバイルで縦に長くなりすぎないよう4:3よりやや横長に調整 */
+    aspect-ratio: 16 / 9;    /* hero2.png（1280x720）の実比率に合わせ、左右が見切れないよう全体を表示 */
     object-fit: cover;
   }
+  .hero .hero-overlay{
+    position: absolute;
+    inset: 0;
+    display:flex;
+    align-items:flex-start;  /* テキストを上部に配置 */
+    justify-content:center;
+    background: rgba(20,20,20,0.45); /* フラットな単色スクリム。グラデーションは使用しない */
+    padding: 24px 20px;
+  }
+  .hero .hero-text{ max-width: 1280px; }
   .hero .hero-content{ padding: 0 20px; }
   .hero .hero-eyebrow{
     display:inline-flex; align-items:center; gap:6px;
-    color: var(--color-accent); font-weight:bold; font-size: 1rem; margin-bottom: 10px;
+    color: #FFE1EC; font-weight:bold; font-size: 2rem; margin-bottom: 20px;
   }
-  .hero .hero-eyebrow .icon{ width:20px; height:20px; }
+  .hero .hero-eyebrow .icon{ width:40px; height:40px; }
   .hero h1{
-    font-size: 1.9rem;
+    font-size: 3.8rem;
     margin: 0 0 0.5em;
-    color: var(--color-primary-dark);
+    color: #ffffff;
   }
-  .hero p.sub{
-    font-size: 1.15rem;
-    color: var(--color-text);
-    margin: 0 auto 24px;
-    max-width: 640px;
+  .hero .hero-overlay p.sub{
+    font-size: 2.3rem;
+    color: #f5f5f5;
+    margin: 0 auto;
+    max-width: 1280px;
   }
 
   /* 共感 */
@@ -169,6 +189,12 @@
     color: var(--color-primary-dark);
   }
   .usp-card .usp-icon .icon{ width: 100%; height: 100%; }
+
+  /* イングリッシュサークル紹介画像（english2.png は横長にトリミング済みのため、そのまま全体を表示） */
+  .circle-image{
+    margin: 24px 0 0; border-radius: 4px; overflow:hidden; border: 1px solid var(--color-border);
+  }
+  .circle-image img{ width:100%; height:auto; }
 
   /* 講座ラインナップ */
   .course-grid{
@@ -195,23 +221,13 @@
   .scene-list{ margin-top: 24px; padding-left: 1.4em; }
   .scene-list li{ margin-bottom: 0.6em; }
 
-  /* 講師紹介・生徒の声 */
-  .placeholder-note{
-    font-size: 1rem; color: var(--color-primary-dark); background: var(--color-bg-soft); border:1px dashed var(--color-border);
-    border-radius: 4px; padding: 10px 14px; margin: 16px 0 0;
-  }
-  .teacher-grid, .voice-grid{
+  /* 生徒の声 */
+  .voice-grid{
     display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
     gap: 24px; margin-top: 24px;
   }
-  .teacher-card, .voice-card{
+  .voice-card{
     background:#ffffff; border:1px solid var(--color-border); border-radius:4px; padding:24px 20px;
-  }
-  .teacher-card .teacher-avatar{
-    width: 72px; height:72px; border-radius:50%;
-    background: var(--color-bg-soft); color: var(--color-primary-dark);
-    display:flex; align-items:center; justify-content:center; font-size:1.6rem; font-weight:bold;
-    margin: 0 auto 12px;
   }
   .voice-card p.voice-body{ font-style: normal; }
   .voice-card p.voice-attr{ color: var(--color-text-soft); font-size:1rem; margin-top: 12px; }
@@ -225,6 +241,31 @@
   table.pricing td.price{ font-weight:bold; }
   table.pricing{ table-layout: fixed; }
   table.pricing th:first-child, table.pricing td:first-child{ width: 40%; }
+
+  /* 講座別の詳細料金表（4列）。table-scrollでモバイル時は横スクロールにする */
+  .table-scroll{ overflow-x: auto; }
+  table.pricing.pricing--courses{ margin-top: 0; min-width: 640px; }
+  table.pricing.pricing--courses th:first-child, table.pricing.pricing--courses td:first-child{ width: 18%; }
+  table.pricing.pricing--courses th:nth-child(4), table.pricing.pricing--courses td:nth-child(4){ width: 18%; }
+
+  /* 講座グループ（タップで開閉するアコーディオン。<details>/<summary>使用） */
+  .pricing-groups{ margin-top: 24px; }
+  .pricing-group{
+    background:#ffffff; border: 1px solid var(--color-border); border-radius:4px;
+    margin-bottom: 16px; overflow:hidden;
+  }
+  .pricing-group summary{
+    cursor:pointer; list-style:none;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding: 18px 20px; font-weight:bold; font-size: 1.15rem; color: var(--color-primary-dark);
+  }
+  .pricing-group summary::-webkit-details-marker{ display:none; }
+  .pricing-group summary .count{ font-weight:normal; font-size:0.95rem; color: var(--color-text-soft); }
+  .pricing-group summary::after{
+    content:"＋"; flex-shrink:0; color: var(--color-primary); font-size:1.3rem; line-height:1;
+  }
+  .pricing-group[open] summary::after{ content:"－"; }
+  .pricing-group .table-scroll{ border-top: 1px solid var(--color-border); }
 
   /* FAQ */
   .faq-item{
@@ -271,7 +312,8 @@
   @media (max-width: 720px){
     body{ padding-bottom: 84px; }
     .mobile-sticky-cta{ display:block; }
-    .hero h1{ font-size: 1.6rem; }
+    .hero h1{ font-size: 3.2rem; }
+    .hero .hero-overlay p.sub{ font-size: 2.1rem; }
     h2{ font-size: 1.4rem; }
     .btn-row{ flex-direction: column; align-items: stretch; }
     .btn-row .btn{ min-width: 0; width: 100%; }
@@ -325,10 +367,6 @@
   </symbol>
 </svg>
 
-<header class="site-header">
-  <!-- ロゴはCEO提供の実ファイル image.png を使用（Gemini生成対象外・既存サイトのロゴURLも使用しない） -->
-  <img src="image.png" alt="つばさカルチャースクール Culture School ロゴ">
-</header>
 
 <!-- ===== ファーストビュー ===== -->
 <!-- 2026-08-24追記⑦: 「地味・和」との指摘を受け、283296.com同様の「ロゴ→大きなヒーロー画像→
@@ -336,15 +374,13 @@
      訴求年齢層も30〜70代へ拡大したキャッチコピーへ刷新した（撤回前は60〜70代中心の文言）。 -->
 <section class="hero">
   <div class="hero-image">
-    <img src="images/hero.png" alt="神戸のつばさカルチャースクールで、30代から70代まで幅広い世代がピアノ・書道・英会話を楽しむ様子">
+    <img src="../images/hero2.png" alt="神戸のつばさカルチャースクールで、幅広い世代がピアノ・書道・英会話を楽しむ様子">
+
+    <a class="hero-logo" href="https://www.283296.com/" aria-label="つばさカルチャースクール公式サイトへ">
+      <img src="../images/tsubasalogo.png" alt="つばさカルチャースクール Culture School ロゴ">
+    </a>
   </div>
   <div class="hero-content section-inner">
-    <p class="hero-eyebrow">
-      <svg class="icon icon-flower" aria-hidden="true"><use href="#icon-flower"/></svg>
-      神戸・湊川公園駅前の総合文化教室
-    </p>
-    <h1>「やってみたい」を、今日から始めよう。</h1>
-    <p class="sub">英語・音楽・書道・そろばん…30代から70代まで、あなたのペースで新しい一歩を。<br class="pc-only">つばさカルチャースクールで、はじめの一歩をお手伝いします。</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="https://www.283296.com/体験レッスン" target="_self">体験レッスンお申込みはこちら</a>
       <a class="btn btn-phone" href="tel:078-576-1224"><svg class="icon" aria-hidden="true"><use href="#icon-phone"/></svg> 078-576-1224（お電話でのお問い合わせ）</a>
@@ -358,12 +394,12 @@
 <section class="section section--soft">
   <div class="empathy-grid">
     <div class="empathy-text">
-      <h2>「そろそろ、何か始めてみようか。」</h2>
-      <p>仕事や子育てが少し落ち着いた30代・40代の「学び直し」。新しい自分に出会いたい50代の「挑戦」。そして、時間にゆとりができた60代・70代の「生きがいづくり」――。年齢もきっかけも人それぞれですが、みなさんに共通するのは「そろそろ、何か始めてみようか」という気持ちです。</p>
+      <h2>「そろそろ何か始めてみようかな」</h2>
+      <p>仕事や子育てが少し落ち着いた30代・40代の「学び直し」。新しい自分に出会いたい50代の「挑戦」。そして、時間にゆとりができた60代・70代、80代になっても元気に通われる方の「生きがいづくり」――。年齢もきっかけも人それぞれですが、みなさんに共通するのは「そろそろ、何か始めてみようか」という気持ちです。</p>
       <p>そんな「そろそろ」の気持ちに、つばさカルチャースクールはそっと寄り添います。年齢を気にせず、自分のペースで、新しい一歩を踏み出せる教室です。</p>
     </div>
     <div class="empathy-image">
-      <img src="images/empathy.png" alt="仕事や子育てが一区切りついた大人が、新しい一歩を踏み出そうとしているイメージ">
+      <img src="../images/empathy.png" alt="仕事や子育てが一区切りついた大人が、新しい一歩を踏み出そうとしているイメージ">
     </div>
   </div>
 </section>
@@ -387,11 +423,38 @@
       <h3>幅広い講座ラインナップ</h3>
       <p>英語・音楽・書道・そろばんなど、ひとつの教室でいろいろな講座から選べます。</p>
     </div>
+    <!-- 出典: doc/LP.md「５５００円が入会金。どのコースも一度はいったら、どれでも、ＯＫ」「二つ同時に習える。英語とピアノを同時に習える。」 -->
     <div class="usp-card">
-      <div class="usp-icon" aria-hidden="true"><svg class="icon"><use href="#icon-home"/></svg></div>
-      <h3>少人数制でアットホーム</h3>
-      <p>初めての方も安心して通える、あたたかい雰囲気を大切にしています。</p>
+      <div class="usp-icon" aria-hidden="true"><svg class="icon icon-flower"><use href="#icon-flower"/></svg></div>
+      <h3>一度の入会で、どの講座もOK</h3>
+      <p>入会金5,500円で、英語・音楽・書道・そろばんなど、どの講座からでも自由に始められます。</p>
     </div>
+  </div>
+</section>
+
+<!-- ===== イングリッシュサークル 無料体験会（告知） =====
+     出典: doc/LP.md「イングリッシュサークル 無料体験会」（doc/7D4B3B31-6280-4422-BD8F-1A048DA14653.jpg 案内チラシの書き起こし）
+     および「趣味を絡めて、英語で話す。木曜日。例えば、自分の大好きなもの、歴史や、アニメ、推し活など、
+     英語でしゃべれる友達を見つけませんか。」より。日程は2026年9月24日(木)・10月1日(木)。 -->
+<section class="section">
+  <h2 class="center">イングリッシュサークル 無料体験会</h2>
+  <p class="center">英字新聞・海外旅行・映画・音楽・料理など、共通の「好き」をテーマに集まる少人数の英語サークルです。歴史・アニメ・推し活など、自分の大好きなものを英語で語り合える仲間を見つけませんか。講師は全てネイティブ。楽しみながら英語が自然と身につきます。</p>
+  <figure class="circle-image">
+    <img src="../images/english2.png" alt="ネイティブ講師と参加者が、英字新聞や地球儀、旅行ガイドなど好きなものを囲んで英語で語り合うイングリッシュサークルの様子" loading="lazy">
+  </figure>
+  <div class="usp-grid">
+    <div class="usp-card">
+      <h3>9月24日(木)</h3>
+      <p>①7:15〜8:00<br>②8:00〜8:45<br>③8:45〜9:30</p>
+    </div>
+    <div class="usp-card">
+      <h3>10月1日(木)</h3>
+      <p>④7:15〜8:00<br>⑤8:00〜8:45<br>⑥8:45〜9:30</p>
+    </div>
+  </div>
+  <p class="center" style="margin-top:24px;">ご予約はお電話にて承ります（受付時間 月〜土曜日 10:00〜19:00　日・祝休み）</p>
+  <div class="btn-row">
+    <a class="btn btn-phone" href="tel:078-576-1224"><svg class="icon" aria-hidden="true"><use href="#icon-phone"/></svg> 078-576-1224（無料体験会のご予約）</a>
   </div>
 </section>
 
@@ -400,7 +463,7 @@
   <h2 class="center">講座ラインナップ</h2>
   <div class="course-grid">
     <div class="course-card">
-      <img src="images/course_english.png" alt="英会話レッスンで使う本や地球儀のイメージ写真">
+      <img src="../images/course_english.png" alt="英会話レッスンで使う本や地球儀のイメージ写真">
       <div class="course-body">
         <h3>英語</h3>
         <ul>
@@ -412,7 +475,7 @@
       </div>
     </div>
     <div class="course-card">
-      <img src="images/course_music.png" alt="ピアノ・フルート・バイオリン・オカリナなど音楽レッスンのイメージ写真">
+      <img src="../images/course_music.png" alt="ピアノ・フルート・バイオリン・オカリナなど音楽レッスンのイメージ写真">
       <div class="course-body">
         <h3>音楽</h3>
         <ul>
@@ -424,7 +487,7 @@
       </div>
     </div>
     <div class="course-card">
-      <img src="images/course_other.png" alt="実用ペン習字・書道・そろばんのレッスンで使う道具のイメージ写真">
+      <img src="../images/course_other.png" alt="実用ペン習字・書道・そろばんのレッスンで使う道具のイメージ写真">
       <div class="course-body">
         <h3>その他</h3>
         <ul>
@@ -445,13 +508,13 @@
   <h2 class="center">こんな方におすすめです</h2>
   <div class="scene-grid">
     <div class="scene-card">
-      <img src="images/scene_recommend1.png" alt="仕事や子育てが落ち着いて新しい一歩を踏み出したい方のイメージ写真">
+      <img src="../images/scene_recommend1.png" alt="仕事や子育てが落ち着いて新しい一歩を踏み出したい方のイメージ写真">
       <div class="scene-body">
         <p>仕事や子育てがひと段落して、新しい一歩を踏み出したい方</p>
       </div>
     </div>
     <div class="scene-card">
-      <img src="images/scene_recommend2.png" alt="昔習っていた楽器をまた弾いてみたい方のイメージ写真（手元のみ）">
+      <img src="../images/scene_recommend2.png" alt="昔習っていた楽器をまた弾いてみたい方のイメージ写真（手元のみ）">
       <div class="scene-body">
         <p>昔ピアノやフルート、バイオリンを習っていて、また弾いてみたい方</p>
       </div>
@@ -468,86 +531,150 @@
   </ul>
 </section>
 
-<!-- ===== 講師紹介（プレースホルダー） ===== -->
-<!--
-  重要: 以下の講師紹介は実データではありません。
-  CEOより実データ（実名・写真・経歴等）の提供を受けていないため、
-  一般化されたテンプレート文言（実名・顔写真・個人特定エピソードを含まない仮プロフィール）で実装しています。
-  実データ提供後、本セクションの差し替えが必要です（PRD 2026-08-24追記の確定方針）。
--->
-<section class="section section--soft">
-  <h2 class="center">講師紹介</h2>
-  <p class="placeholder-note center">※本セクションはプレースホルダーであり実データではありません。CEOからの実データ提供後に差し替え予定です。</p>
-  <div class="teacher-grid">
-    <div class="teacher-card">
-      <div class="teacher-avatar" aria-hidden="true">A</div>
-      <h3 class="center">A先生（英会話講師・指導歴◯年）</h3>
-      <p>初めての方にも分かりやすく、楽しみながら英語に親しめるレッスンを心がけています。</p>
-    </div>
-    <div class="teacher-card">
-      <div class="teacher-avatar" aria-hidden="true">B</div>
-      <h3 class="center">B先生（ピアノ講師・指導歴◯年）</h3>
-      <p>年齢や経験に関わらず、お一人おひとりのペースに合わせて丁寧に指導いたします。</p>
-    </div>
-    <div class="teacher-card">
-      <div class="teacher-avatar" aria-hidden="true">C</div>
-      <h3 class="center">C先生（書道・そろばん講師・指導歴◯年）</h3>
-      <p>基本から丁寧に、美しい字や集中力が身につくレッスンを行っています。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 生徒の声（プレースホルダー） ===== -->
-<!--
-  重要: 以下の生徒の声は実データではありません。
-  実名を含まない一般化されたテンプレート文言（架空の感想例）で実装しています。
-  CEOからの実データ（取材内容）提供後、本セクションの差し替えが必要です（PRD 2026-08-24追記の確定方針）。
--->
+<!-- ===== 生徒の声 =====
+     出典: doc/LP.md（CEOからの聞き取りメモ）。以下3件は生徒・保護者の発言の逐語引用ではなく、
+     メモに記載された事実（年代・受講状況等）をもとに構成した紹介文です。
+     「８０代の人も元気に通ってくれています。」
+     「二つ同時に習える。英語とピアノを同時に習える。同じ日に。二つ習っている人は多い。
+       ピアノとバイオリンなど。６０代女性」
+     「子どもたちを一人で来させるのに、大通り沿いなので、学校帰りも安心して通えます。
+       学校が裏にある。人目があるところに立地しているので。５０代主婦」 -->
 <section class="section">
   <h2 class="center">生徒の声</h2>
-  <p class="placeholder-note center">※本セクションはプレースホルダーであり実データではありません。CEOからの実データ提供後に差し替え予定です。</p>
   <div class="voice-grid">
     <div class="voice-card">
-      <p class="voice-body">「子育てが少し落ち着いて、何か始めたいと思い、体験レッスンを受けました。少人数で自分のペースで学べるので、無理なく続けられています。」</p>
-      <p class="voice-attr">40代・英会話講座受講中（一般化された例文）</p>
+      <p class="voice-body">「英語とピアノ、同じ日に両方通っています。一つの教室でいくつも習えるので掛け持ちがしやすいですね。ピアノとバイオリンを両方習っている方も多いんですよ。」</p>
+      <p class="voice-attr">60代・女性／英会話講座＋ピアノ講座受講中</p>
     </div>
     <div class="voice-card">
-      <p class="voice-body">「昔習っていたピアノをもう一度弾きたくて通い始めました。丁寧に教えていただけるので安心して続けられています。」</p>
-      <p class="voice-attr">70代・ピアノ講座受講中（一般化された例文）</p>
+      <p class="voice-body">「大通り沿いで、学校もすぐ裏にあるので、子どもを一人で通わせても安心です。人目があるところに教室があるのがありがたいですね。」</p>
+      <p class="voice-attr">50代・主婦（お子様が通室中）</p>
     </div>
     <div class="voice-card">
-      <p class="voice-body">「駅から近く、教室の雰囲気もアットホームで、通うのが楽しみになりました。」</p>
-      <p class="voice-attr">50代・書道講座受講中（一般化された例文）</p>
+      <p class="voice-body">「80代になった今も、元気に教室に通わせてもらっています。年齢を気にせず続けられるのがうれしいです。」</p>
+      <p class="voice-attr">80代・受講中</p>
     </div>
   </div>
 </section>
 
-<!-- ===== 料金・お申込みプラン ===== -->
+<!-- ===== 料金・お申込みプラン =====
+     出典: doc/LP.md「コース料金表（つばさカルチャースクール）」
+     （doc/2F582748-779C-4ED2-BEF7-3A76D0EE3D6F.jpg おけいこ教室のご案内チラシの書き起こし）。
+     入会金・体験レッスン料金はチラシ記載の実額（入会金5,500円）に修正した
+     （旧版の¥10,000表記・夏季講習パックは出典未確認のため削除）。 -->
 <section class="section section--soft2">
   <h2 class="center">料金・お申込みプラン</h2>
-  <table class="pricing">
-    <thead>
-      <tr><th>プラン</th><th>料金</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>入会金</td>
-        <td class="price">¥10,000</td>
-      </tr>
-      <tr>
-        <td>体験レッスン</td>
-        <td class="price">¥1,100（習字のみ ¥500）</td>
-      </tr>
-      <tr>
-        <td>夏季講習5回パック</td>
-        <td class="price">¥15,000</td>
-      </tr>
-      <tr>
-        <td>夏季講習10回パック</td>
-        <td class="price">¥28,000</td>
-      </tr>
-    </tbody>
-  </table>
+  <p class="center">入会金 5,500円（税込）。体験レッスンは1,100円（習字のみ500円）。一度ご入会いただければ、下記のどの講座も自由に受講いただけます。</p>
+  <div class="pricing-groups">
+    <details class="pricing-group">
+      <summary>英語 <span class="count">（5講座）</span></summary>
+      <div class="table-scroll">
+        <table class="pricing pricing--courses">
+          <thead>
+            <tr><th>講座名</th><th>日時</th><th>内容</th><th>月謝</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>英会話個人レッスン</td>
+              <td>月〜土曜日 10:00〜20:00／1レッスン30分</td>
+              <td>講師は全てネイティブ。完全個別対応で、あなただけのオリジナルカリキュラム。対象3歳〜</td>
+              <td class="price">月3回 10,600円</td>
+            </tr>
+            <tr>
+              <td>英会話ファミリーレッスン</td>
+              <td>月〜土曜日 10:00〜20:00／1レッスン30分</td>
+              <td>ネイティブ講師とご家族皆様で同じ内容のレッスン。人数に関わらずご家族ご一緒に受講可能</td>
+              <td class="price">月3回 10,600円</td>
+            </tr>
+            <tr>
+              <td>英会話団体レッスン</td>
+              <td>月〜土曜日 10:00〜20:00／1レッスン60分</td>
+              <td>仲良しのお友達やご家族だけのプライベートレッスン。人数によりお得な団体割引あり</td>
+              <td class="price">月3回 2組各7,500円／3組以上各6,500円</td>
+            </tr>
+            <tr>
+              <td>英検4級</td>
+              <td>水曜日 16:30〜17:30／1レッスン60分</td>
+              <td>英検4級（中学2年生程度）合格を目指す、定員5名までのグループ講座。対象：5級合格者</td>
+              <td class="price">月4回 8,000円</td>
+            </tr>
+            <tr>
+              <td>英検3級</td>
+              <td>土曜日 9:00〜11:00／1レッスン60分</td>
+              <td>少人数制で英作文・面接対策も。短期合格を目指し個別にカリキュラムを設計。対象：4級合格者</td>
+              <td class="price">月3回 9,000円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="pricing-group">
+      <summary>音楽 <span class="count">（4講座）</span></summary>
+      <div class="table-scroll">
+        <table class="pricing pricing--courses">
+          <thead>
+            <tr><th>講座名</th><th>日時</th><th>内容</th><th>月謝</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ピアノ個人レッスン</td>
+              <td>月〜土曜日 10:00〜20:00／1レッスン30分</td>
+              <td>講師4名（音大出身・音大出身教職者・ヤマハ出身者）から選べます。対象3歳〜</td>
+              <td class="price">月3回 7,200円</td>
+            </tr>
+            <tr>
+              <td>フルート個人レッスン</td>
+              <td>火・金曜日 10:00〜20:00／1レッスン30分</td>
+              <td>初めての方でも安心。体験用フルートもご用意しています。対象7歳〜</td>
+              <td class="price">月3回 7,200円</td>
+            </tr>
+            <tr>
+              <td>バイオリン個人レッスン</td>
+              <td>月・土曜日 10:00〜15:00／1レッスン30分</td>
+              <td>初めての方も基礎から個別指導。3歳からシニアまでOK</td>
+              <td class="price">月3回 7,200円</td>
+            </tr>
+            <tr>
+              <td>オカリナ個人レッスン</td>
+              <td>火・金曜日 10:00〜20:00／1レッスン30分</td>
+              <td>初心者の方も安心。オカリナならではの豊かな音色で、基礎から様々な曲を学べます</td>
+              <td class="price">月3回 7,200円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="pricing-group">
+      <summary>その他 <span class="count">（3講座）</span></summary>
+      <div class="table-scroll">
+        <table class="pricing pricing--courses">
+          <thead>
+            <tr><th>講座名</th><th>日時</th><th>内容</th><th>月謝</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>実用ペン習字・書道</td>
+              <td>火曜日 15:00〜18:30／1レッスン50分</td>
+              <td>〈美しい文字〉を一生の財産に。初心者にも丁寧な指導で確実に上達、段・級の取得も可能。対象3歳〜大人</td>
+              <td class="price">月4回 3,300円</td>
+            </tr>
+            <tr>
+              <td>そろばん</td>
+              <td>水曜日 17:30〜19:00／1レッスン45分</td>
+              <td>定員6名までの少人数制。採点待ちの行列なし。1〜2ヶ月に1回検定試験を実施</td>
+              <td class="price">月4回 3,000円</td>
+            </tr>
+            <tr>
+              <td>個人学習</td>
+              <td>月〜金曜日 15:30〜18:00／1レッスン45分</td>
+              <td>ご希望の科目を元小学校教諭がマンツーマン指導。対象：小学生</td>
+              <td class="price">月3回 9,000円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
   <div class="btn-row">
     <a class="btn btn-primary" href="https://www.283296.com/体験レッスン" target="_self">体験レッスンお申込みはこちら</a>
   </div>
@@ -574,7 +701,7 @@
 
   <div class="faq-item">
     <p class="q">月謝以外にかかる費用はありますか？</p>
-    <p class="a">入会金（¥10,000）以外は特にございません。教材費等が別途必要となる講座がある場合もございますので、詳細は入会時にご確認いただけますと幸いです。</p>
+    <p class="a">入会金（¥5,500）以外は特にございません。教材費等が別途必要となる講座がある場合もございますので、詳細は入会時にご確認いただけますと幸いです。</p>
   </div>
 
   <div class="faq-item">
@@ -594,7 +721,7 @@
   <div class="access-grid">
     <div class="access-image">
       <!-- 既存サイト(283296.com)掲載の教室外観写真を転用（Gemini生成ではなく実写真） -->
-      <img src="images/exterior.jpg" alt="つばさカルチャースクール 教室外観写真">
+      <img src="../images/exterior.jpg" alt="つばさカルチャースクール 教室外観写真">
     </div>
     <div class="access-info">
       <dl>
